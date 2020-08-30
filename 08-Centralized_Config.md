@@ -336,7 +336,7 @@ config들을 잘 가져오는 것을 확인할 수 있습니다
 
 configuration 하나만 바꼈다고 애플리케이션을 rebuild를 한 경험이 다들 있을 겁니다. Spring Cloud는 `@RefreshScopes`라는 개념이 있는데요. 등록된 빈들이 git commit hook에 의해 bean들이 바로 업데이트되는 거죠
 
-![img/img/part8-springcloudbusexchange.png](img/part8-springcloudbusexchange.png)
+![img/part8-springcloudpush.png](img/part8-springcloudpush.png)
 
 우리는 일단 깃허브 repository를 사용하고 있습니다. 현재 상황으로는 그러면 configuration server로 post-commit hook operation을 보낼 방법이 없는데요. 그래서 spring cloud config server의 /montior 엔드포인트로 commit hook을 보낼 겁니다. 
 
