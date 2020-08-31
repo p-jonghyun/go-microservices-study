@@ -45,3 +45,22 @@ Docker Swarm에서 3개의 producer 서비스 인스턴스가 있다고 합시�
 accountservice에 quote-service와 새로운 서비스인 imageservice로 통신하는 것을 circuit breaker로 감싸보죠. 
 
 ![img/part11-overview.png](img/part11-overview.png)
+
+```bash
+{"name":"Person_6","servedBy":"10.255.0.19","quote":{"quote":"To be or not to be","ipAddress":"10.0.0.22"},"imageUrl":"http://imageservice:7777/file/cake.jpg"} 
+{"name":"Person_23","servedBy":"10.255.0.21","quote":{"quote":"You, too, Brutus?","ipAddress":"10.0.0.25"},"imageUrl":"http://imageservice:7777/file/cake.jpg"}
+```
+
+이런식으로 답장이 옵니다. 
+
+quoteservice를 잠시 죽여봅시다. 
+
+```bash
+> docker service scale quotes-service=0
+```
+
+그러면 우리가 정의했던 fallback method로 실행이되는데요
+
+```bash
+{name":"Person_23","servedBy":"10.255.0.19","quote":{"quote":"May the source be with you, always.","ipAddress":"circuit-breaker"},"imageUrl":"http://imageservice:7777/file/cake.jpg"}
+```
